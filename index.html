@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Papper Scissor</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: antiquewhite;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+
+        }
+
+        table,
+        td {
+            border: 3px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            margin: 50px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 300px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .btn,
+        img {
+            border-radius: 100%;
+            background-color: white;
+        }
+
+        .count {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .reset {
+            width: 100px;
+            height: 40px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: blue;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        p{
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="container">
+            <h1>Rock Papper Scissor</h1>
+            <div>
+                <button onclick="play('Rock')" class="btn"><img src="C:\Users\DELL\OneDrive\Desktop\placement\13-03-2025\Rock Papper Scissor\assets\rock_img.jpg" class="img"></button>
+                <button onclick="play('Papper')" class="btn"><img src="C:\Users\DELL\OneDrive\Desktop\placement\13-03-2025\Rock Papper Scissor\assets\paper_img.jpg" class="img"></button>
+                <button onclick="play('Scissor')" class="btn"><img src="C:\Users\DELL\OneDrive\Desktop\placement\13-03-2025\Rock Papper Scissor\assets\scissor_img.jpg" class="img"></button>
+            </div>
+            <p id="game-result">-</p>
+            <center>
+                <table class="table">
+                    <tr>
+                        <td>You</td>
+                        <td>Computer</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p id="user-choice">-</p>
+                        </td>
+                        <td>
+                            <p id="computer-choice">-</p>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td class="count">Wins : 0</td>
+                        <td class="count">Losses : 0</td>
+                        <td class="count">Ties : 0</td>
+                    </tr>
+                </table>
+            </center>
+            <button onclick="reset()" class="reset">Reset</button>
+        </div>
+    </center>
+
+    <script>
+        const user_choice = document.getElementById("user-choice")
+        const computer_choice = document.getElementById("computer-choice")
+        const game_result = document.getElementById("game-result")
+        const count = document.getElementsByClassName("count")
+        let wins = 0, losses = 0, ties = 0
+        let matches = 0
+
+        function play(user_cho) {
+            matches++
+            let comp_cho = getRandom()
+            user_choice.innerHTML = user_cho
+            computer_choice.innerHTML = comp_cho
+            if (user_cho === "Rock") {
+                if (comp_cho === "Scissor") {
+                    wins++
+                    game_result.innerHTML = "You Win"
+                    console.log("User wins")
+                }
+                else if (comp_cho === "Papper") {
+                    losses++
+                    game_result.innerHTML = "You Loss"
+                    console.log("User Loss")
+                }
+                else {
+                    ties++
+                    game_result.innerHTML = "Game is Tie"
+                    console.log("Game is Tie")
+                }
+            }
+            else if (user_cho === "Papper") {
+                if (comp_cho === "Rock") {
+                    wins++
+                    game_result.innerHTML = "You Win"
+                    console.log("User Win")
+                }
+                else if (comp_cho === "Scissor") {
+                    losses++
+                    game_result.innerHTML = "You Loss"
+                    console.log("User Loss")
+                }
+                else {
+                    ties++
+                    game_result.innerHTML = "Game is Tie"
+                    console.log("Game is Tie")
+                }
+            }
+            else {
+                ties++
+                game_result.innerHTML = "Game is Tie"
+                console.log("Game is Tie")
+            }
+
+            count[0].innerHTML = `Wins : ${wins}`
+            count[1].innerHTML = `Losses : ${losses}`
+            count[2].innerHTML = `Ties : ${ties}`
+
+            if (matches === 5) {
+                if (wins > losses) {
+                    alert("You Win")
+                }
+                else if (losses > wins) {
+                    alert("you Loss")
+                }
+                else {
+                    alert("Game is Tie")
+                }
+                reset()
+            }
+        }
+
+        function reset() {
+            wins = 0
+            losses = 0
+            ties = 0
+            matches = 0
+
+            count[0].innerHTML = `Wins : ${wins}`
+            count[1].innerHTML = `Losses : ${losses}`
+            count[2].innerHTML = `Ties : ${ties}`
+
+            game_result.innerHTML = "-"
+            user_choice.innerHTML = "-"
+            computer_choice.innerHTML = "-"
+            alert("Game Reseted Sucessfully")
+        }
+
+        function getRandom() {
+            let n = Math.round(Math.random() * 2)
+            return (n === 0) ? "Rock" : ((n === 1) ? "Papper" : "Scissor")
+        }
+    </script>
+
+</body>
+
+</html>

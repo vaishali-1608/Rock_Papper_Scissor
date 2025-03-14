@@ -158,9 +158,21 @@
                 }
             }
             else {
-                ties++
-                game_result.innerHTML = "Game is Tie"
-                console.log("Game is Tie")
+                if (comp_cho === "Papper") {
+                    wins++
+                    game_result.innerHTML = "You Win"
+                    console.log("User Win")
+                }
+                else if (comp_cho === "Rock") {
+                    losses++
+                    game_result.innerHTML = "You Loss"
+                    console.log("User Loss")
+                }
+                else {
+                    ties++
+                    game_result.innerHTML = "Game is Tie"
+                    console.log("Game is Tie")
+                }
             }
 
             count[0].innerHTML = `Wins : ${wins}`
